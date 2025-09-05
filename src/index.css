@@ -2,41 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Smart Student Hub Design System */
 
 @layer base {
   :root {
+    /* Core Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 13% 18%;
 
+    /* Brand Colors - Blue gradient theme */
+    --primary: 210 100% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 100% 65%;
+    --primary-dark: 210 100% 45%;
+
+    /* Secondary Colors */
+    --secondary: 210 17% 96%;
+    --secondary-foreground: 220 13% 18%;
+
+    /* Card & Surface */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
+    --card-hover: 210 17% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Text Colors */
+    --muted: 210 17% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 210 17% 96%; 
+    --accent-foreground: 220 13% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Interactive */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 210 100% 56%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 56%), hsl(220 100% 65%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 17% 98%));
+    --gradient-cta: linear-gradient(135deg, hsl(210 100% 56%), hsl(200 100% 60%));
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(220 13% 18% / 0.1), 0 2px 4px -1px hsl(220 13% 18% / 0.06);
+    --shadow-card-hover: 0 10px 15px -3px hsl(220 13% 18% / 0.1), 0 4px 6px -2px hsl(220 13% 18% / 0.05);
+    --shadow-hero: 0 25px 50px -12px hsl(210 100% 56% / 0.25);
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Spacing & Layout */
+    --radius: 12px;
+    --radius-lg: 16px;
+    --container-padding: 1.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +114,94 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom animations and effects */
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-card-hover hover:bg-card-hover hover:-translate-y-1;
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .cta-gradient {
+    background: var(--gradient-cta);
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: hsl(0 0% 100% / 0.8);
+  }
+
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom shadows */
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card-hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.shadow-hero {
+  box-shadow: var(--shadow-hero);
 }
